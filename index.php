@@ -1,3 +1,12 @@
+<?php 
+include_once("./config/db.php");
+
+
+$sql = "SELECT * FROM contas";
+$stmt = $pdo->prepare($sql);  
+$stmt->execute();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,12 +34,18 @@
       </form>
     </div>
     <main>
+      <?php 
+        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach($usuarios as $usuario): // Aqui no final do foreach eu adicionei dois pontos, para que o fluxo não fosse finalizado, caso eu tivesse utilizado o ponto e virgula, coisa que só deverá ser feita, quando o foreach finalizar o que eu quero que ocorra.
+      ?>
+
       <i>User</i>
       <div>
-        <h2>Nome</h2>
-        <p>Email@email.com</p>
+        <h2><?= htmlspecialchars($usuario['titular']) ?></h2> <!-- Comecei a utilizar o htmlspecialchars, para evitar problemas de injeção de html, por mais que tenhamos usado o prepare lá na solicitação dos dados do DB. Chamado de dados XSS, EX: <script>alert('escript de um engraçadinho')</script> -->
+        <p><?= htmlspecialchars($usuario['email']) ?></p>
       </div>
       <p>Idade</p>
+      <hr><?php endforeach; ?> <!-- Aqui eu estou finalizando o fluxo que eu espero que o foreach faça -->
     </main>
     <footer>
       <i>Cadastrar</i>
