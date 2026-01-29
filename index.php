@@ -9,7 +9,7 @@ include_once("./config/db.php");
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://kit.fontawesome.com/a325e67bc5.js" crossorigin="anonymous"></script>
-  <title>Ordenador</title>
+  <title>Projeto Ordenador</title>
 </head>
 <body>
   <?php 
